@@ -226,9 +226,9 @@ docker-compose build
 docker-compose up
 ```
 
-## Licence
-Copyright ZikLive 2025 - All right reserved
-
-
 ## Author
 [Fanuel PIERRE](https://github.com/fpierr)
+
+
+## Licence
+Copyright ZikLive 2025 - All right reserved
