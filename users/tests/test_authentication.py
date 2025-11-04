@@ -1,3 +1,7 @@
+#!usr/bin/env python3
+"""test midleware user"""
+
+
 import uuid
 import pytest
 from rest_framework.test import APIRequestFactory
