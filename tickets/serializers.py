@@ -1,4 +1,7 @@
-# tickets/serializers.py
+#!/usr/bin/env python
+"""tickets serializers"""
+
+
 from rest_framework import serializers
 from .models import Ticket, TicketType
 
@@ -19,3 +22,4 @@ class TicketSerializer(serializers.ModelSerializer):
         model = Ticket
         fields = ['id', 'ticket_type', 'ticket_type_name', 'event_title', 'buyer', 'purchased_at']
         read_only_fields = ['id', 'buyer', 'purchased_at']
+
