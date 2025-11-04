@@ -73,7 +73,7 @@ This project can power a scalable, real time supporting:
 ---
 
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
 ### Create and activate a virtual environment
 
