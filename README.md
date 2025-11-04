@@ -1,9 +1,12 @@
-# ziklive backend
+# ZikLive Backend
 
+
+##### By : [Fanuel PIERRE](https://github.com/fpierr)
+---
 ZikLive is a platform that empowers artists and promoters to centralize and manage their events calendar.  
 Artists can easily publish their concert schedules, allowing fans to follow their favorite performers and book tickets.  
 
-Beyond event management, ZikLive enables live streaming and post-event replays — giving artists and promoters new opportunities to **monetize performances and replays**.  
+Beyond event management, ZikLive enables live streaming and post-event replays — giving artists and promoters new opportunities to monetize performances and replays.  
 
 The ZikLive backend is built using Django, PostgreSQL, and Redis (with Docker for local development).
 For the MVP for the Demo, Mux, a managed service, was selected to provide live streaming capabilities through OBS/RTMP and WebRTC (browser).
@@ -46,7 +49,7 @@ This project can power a scalable, real time supporting:
 | **Live Streaming** | Mux API (OBS / WebRTC) |
 | **Payments** | Stripe |
 | **Testing** | Pytest, pytest-django, pytest-cov |
-| **Containerization** | Docker & docker-compose (test local) |
+| **Containerization** | Docker & docker-compose |
 | **Language** | Python3 |
 
 
@@ -77,10 +80,13 @@ This project can power a scalable, real time supporting:
 python -m venv venv
 ```
 #### On Windows
+```
 zikenv\Scripts\activate
-
+```
 #### On Ubuntu
+```
 source venv/bin/activate
+```
 
 #### Deactivate
 ```deactivate```
@@ -127,8 +133,9 @@ ALTER USER postgres WITH PASSWORD 'db_password';
 ```
 
 #### Show infos in the table user:
+```
 SELECT * FROM users_user;
-
+```
 ### Exit db
 `Ctrl + D`
 
@@ -159,11 +166,14 @@ python manage.py runserver
 ```
 sudo apt update
 sudo apt install redis-server
-
-(oWe can do also: sudo apt install redis-server -y; 
--y = yes default)
-
 ```
+
+#### We can also do:
+```
+sudo apt install redis-server -y; 
+```
+-y = yes for default
+
 
 ### test fonctionnality redis
 ```
@@ -181,7 +191,7 @@ journalctl -u redis-server
 ```
 
 
-- Start redis auto on boot:
+### Start redis auto on boot:
 ```
 sudo systemctl enable redis-server
 ```
@@ -194,7 +204,7 @@ sudo systemctl disable redis-server
 
 
 
-- Test redis connection, output PONG:
+### Test redis connection, output PONG:
 ```
 redis-cli ping
 ```
@@ -205,8 +215,9 @@ redis-cli ping
 
 
 #### List of keys:
+```
 KEYS *
-
+```
 
 ## Build and run with Docker:
 ```
@@ -217,3 +228,7 @@ docker-compose up
 
 ## Licence
 Copyright ZikLive 2025 - All right reserved
+
+
+## Author
+[Fanuel PIERRE](https://github.com/fpierr)
