@@ -1,0 +1,73 @@
+services:
+  ziklive_backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    container_name: ziklive_backend
+    command: gunicorn ziklive.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - ziklive_db
+      - ziklive_redis
+    networks:
+      - ziklive_network
+    secrets:
+      - django_secret_key
+      - db_user
+      - db_password
+      - redis_password
+    environment:
+      DB_HOST: ziklive_db
+      DB_PORT: 5432
+      REDIS_HOST: ziklive_redis
+      REDIS_PORT: 6379
+
+  ziklive_db:
+    image: postgres:15
+    container_name: ziklive_db
+    restart: unless-stopped
+    volumes:
+      - pgdata_ziklive:/var/lib/postgresql/data
+    networks:
+      - ziklive_network
+    secrets:
+      - db_user
+      - db_password
+    environment:
+      POSTGRES_DB: ziklive
+      POSTGRES_USER_FILE: /run/secrets/db_user
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    ports:
+      - "5434:5432"
+
+  ziklive_redis:
+    image: redis:7.2-alpine
+    container_name: ziklive_redis
+    restart: unless-stopped
+    networks:
+      - ziklive_network
+    ports:
+      - "6381:6379"
+    secrets:
+      - redis_password
+    command: ["redis-server", "--requirepass", "/run/secrets/redis_password"]
+
+volumes:
+  pgdata_ziklive:
+
+networks:
+  ziklive_network:
+    driver: bridge
+
+secrets:
+  django_secret_key:
+    file: secrets/django_secret_key.txt
+  db_user:
+    file: secrets/db_user.txt
+  db_password:
+    file: secrets/db_password.txt
+  redis_password:
+    file: secrets/redis_password.txt
