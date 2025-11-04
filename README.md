@@ -89,12 +89,13 @@ zikenv\Scripts\activate
 source venv/bin/activate
 ```
 
-#### Deactivate
+#### Deactivate virtual environnment
 ```deactivate```
 
 ### Install dependencies
 
-```pip install -r requirements.txt
+```
+pip install -r requirements.txt
 ```
 
 
