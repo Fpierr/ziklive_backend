@@ -3,6 +3,7 @@
 
 ##### By : [Fanuel PIERRE](https://github.com/fpierr)
 ---
+## Context and Objectif
 ZikLive is a platform that empowers artists and promoters to centralize and manage their events calendar.  
 Artists can easily publish their concert schedules, allowing fans to follow their favorite performers and book tickets.  
 
