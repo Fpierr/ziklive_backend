@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Streaming model to manage live creation"""
 
 from django.db import models
