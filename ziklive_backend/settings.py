@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'artists',
     'events',
     'tickets',
+    'streaming',
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
@@ -272,3 +273,7 @@ cloudinary.config(
     api_secret=os.getenv('MEDIA_API_SECRET'),
     secure=True
 )
+
+# Live service
+MUX_TOKEN_ID = os.getenv('MUX_TOKEN_ID')
+MUX_TOKEN_SECRET = os.getenv('MUX_TOKEN_SECRET')

@@ -99,7 +99,7 @@ class LiveStream(models.Model):
 
     def __str__(self):
         live_creator = getattr(self.created_by, 'name', self.created_by.email)
-        return f"{self.title} - {live_creator} ({self.get_status_display()})"
+        return f"{self.title} - {live_creator} ({self.get_status_display()}) ({self.get_stream_mode_display()})"
 
     def clean(self):
         """Validate model data before saving"""
