@@ -1,4 +1,7 @@
-# tickets/permissions.py
+#!/usr/bin/env python
+"""tickets permission"""
+
+
 from rest_framework.permissions import BasePermission
 
 class IsFan(BasePermission):

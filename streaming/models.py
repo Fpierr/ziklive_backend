@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+"""Streaming model to manage live creation"""
+
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -31,7 +34,7 @@ class LiveStream(models.Model):
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name='streams',
+        related_name='created_streams',
         limit_choices_to={'role__in': ['artist', 'promoter']},
         help_text="Artist or Promoter who created this stream"
     )
@@ -90,22 +93,22 @@ class LiveStream(models.Model):
         verbose_name_plural = 'Live Streams'
         indexes = [
             models.Index(fields=['status', '-created_at']),
-            models.Index(fields=['artist', '-created_at']),
+            models.Index(fields=['created_by', '-created_at']),
             models.Index(fields=['stream_mode']),
         ]
 
     def __str__(self):
-        artist_name = getattr(self.artist, 'name', self.artist.email)
-        return f"{self.title} - {artist_name} ({self.get_status_display()})"
+        live_creator = getattr(self.created_by, 'name', self.created_by.email)
+        return f"{self.title} - {live_creator} ({self.get_status_display()})"
 
     def clean(self):
         """Validate model data before saving"""
         super().clean()
-        
-        # Validate artist role
-        if self.artist and self.artist.role not in ['artist', 'promoter']:
+
+        # Validate creator role
+        if self.created_by and self.created_by.role not in ['artist', 'promoter']:
             raise ValidationError({
-                'artist': 'Only users with Artist or Promoter role can create streams.'
+                'created_by': 'Only users with Artist or Promoter role can create streams.'
             })
 
         # Validate paid stream
@@ -119,7 +122,7 @@ class LiveStream(models.Model):
                 raise ValidationError(
                     'OBS streams require ingest_endpoint and playback_url.'
                 )
-        
+
         if self.stream_mode == 'webcam' and self.status == 'live':
             if not self.webrtc_session_id:
                 raise ValidationError(
@@ -203,19 +206,19 @@ class LiveStream(models.Model):
         return not self.is_paid
 
 
-class StreamView(models.Model):
+class StreamViewer(models.Model):
     """
     Track individual viewer sessions for analytics and billing.
     """
-    
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    
+
     stream = models.ForeignKey(
         LiveStream, 
         on_delete=models.CASCADE, 
         related_name='views'
     )
-    
+
     viewer = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
         on_delete=models.SET_NULL, 
