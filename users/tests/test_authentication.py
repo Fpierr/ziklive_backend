@@ -13,9 +13,8 @@ from users.session_manager import create_session
 
 User = get_user_model()
 
-# ========================
-# Fixtures
-# ========================
+
+#======== Fixtures =======================
 
 @pytest.fixture
 def user(db):
@@ -43,9 +42,7 @@ def session_id(user, csrf_token):
 def auth_class():
     return CookieJWTWithRedisSessionAuth()
 
-# ========================
-# Tests
-# ========================
+#======== Tests =======================
 
 @pytest.mark.django_db
 def test_authenticate_web_success(auth_class, access_token, session_id, csrf_token):
