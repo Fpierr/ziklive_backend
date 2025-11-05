@@ -10,7 +10,7 @@ from datetime import timedelta
 from decimal import Decimal
 import uuid
 
-from streaming.models import LiveStream, StreamViewer
+from streams.models import LiveStream, StreamViewer
 
 
 @pytest.fixture

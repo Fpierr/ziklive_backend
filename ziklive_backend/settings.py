@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'artists',
     'events',
     'tickets',
-    'streaming',
+    'streams',
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
