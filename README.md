@@ -14,7 +14,7 @@ For the MVP for the Demo, Mux, a managed service, was selected to provide live s
 
 ---
 
-This project can power a scalable, real time supporting:
+This platform is built to scale seamlessly while supporting real-time experiences :
 - Live concert broadcasts in high quality via `Mux streaming`
 - Automated `ticket sales and payment processing`
 - Multi-role access for `artists`, `fans`, and `promoters`
@@ -206,7 +206,7 @@ sudo systemctl disable redis-server
 
 
 
-### Test redis connection, output PONG:
+### Test redis connection, output `PONG`:
 ```
 redis-cli ping
 ```
